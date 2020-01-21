@@ -4,15 +4,11 @@ from create import *
 from read import *
 from update import *
 from delete import *
-import sqlite3
-import psycopg2
-import MySQLdb
 
 db = PostgresqlDatabase('contacts', user='postgres', password='',
                         host='localhost', port=5432)
 
 # \n == LINE BREAK
-
 
 class BaseModel(Model):
 
@@ -163,10 +159,44 @@ def update_info_by_first():
     print('UPDATE CONTACT PHONE NUMBER')
     print('Enter the person`s first name')
     print(' ')
-    person = input('first name: ')
+    first = input('First name: ')
     new_phone = input('New phone number: ')
     try:
-        reply = Contact.get(Contact.first_name == person)
+        reply = Contact.get(Contact.first_name == first)
+        reply.phone = new_phone
+        reply.save()
+    finally:
+        print(' ')
+        print('INVALID RESPONSE')
+        input('Press ENTER to try again')
+        update_info_by_chioice()
+
+def update_info_by_last():
+    print(' ')
+    print('UPDATE CONTACT PHONE NUMBER')
+    print('Enter the person`s last name')
+    print(' ')
+    last = input('Last name: ')
+    new_phone = input('New phone number: ')
+    try:
+        reply = Contact.get(Contact.first_name == last)
+        reply.phone = new_phone
+        reply.save()
+    finally:
+        print(' ')
+        print('INVALID RESPONSE')
+        input('Press ENTER to try again')
+        update_info_by_chioice()
+
+def update_info_by_phone():
+    print(' ')
+    print('UPDATE CONTACT PHONE NUMBER')
+    print('Enter the person`s phone number')
+    print(' ')
+    phone = input('Phone number: ')
+    new_phone = input('New phone number: ')
+    try:
+        reply = Contact.get(Contact.phone == phone)
         reply.phone = new_phone
         reply.save()
     finally:
@@ -220,8 +250,13 @@ def delete_contact_by_first():
         print(' ')
         yes_no = input(f"Are you sure you want to delete the contact info for " + person + "? Y or N: ")
         if yes_no == 'Y':
+            print(' ')
+            print('CONTACT DELETED')
+            print(' ')
+            input('Press ENTER to return home')
             reply = Contact.get(Contact.first_name == person)
             reply.delete_instance()
+            prompt_options()
         elif yes_no == 'N':
             print(' ')
             input('Press ENTER to return home')
