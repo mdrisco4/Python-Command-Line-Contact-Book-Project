@@ -4,6 +4,9 @@ from create import *
 from read import *
 from update import *
 from delete import *
+import sqlite3
+import psycopg2
+import MySQLdb
 
 db = PostgresqlDatabase('contacts', user='postgres', password='',
                         host='localhost', port=5432)
