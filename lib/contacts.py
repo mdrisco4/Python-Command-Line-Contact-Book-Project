@@ -116,6 +116,10 @@ def get_info_by_first():
             print(f"Address: {reply.address}")
             print(f"Phone: {reply.phone}")
             print(f"Email: {reply.email}")
+            print(" ")
+            input("Hit ENTER to return home")
+            print(" ")
+            prompt_options()
     finally:
         print(' ')
         # print('INVALID RESPONSE')
@@ -165,6 +169,8 @@ def update_info_by_first():
         reply = Contact.get(Contact.first_name == first)
         reply.phone = new_phone
         reply.save()
+        prompt_options()
+
     finally:
         print(' ')
         print('INVALID RESPONSE')
