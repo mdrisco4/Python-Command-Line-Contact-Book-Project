@@ -223,6 +223,7 @@ def update_info_by_choice():
             reply = Contact.get(Contact.first_name == person)
             reply.phone = new_phone
             reply.save()
+            prompt_options()
         finally:
             print(' ')
             print('INVALID RESPONSE')
